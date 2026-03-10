@@ -1,0 +1,7 @@
+{
+  "name": "ed25519_only",
+  "description": "Only Ed25519 keys are allowed for commit signing",
+  "enforcement": "enforce",
+  "allowed_key_types": ["ssh-ed25519"],
+  "rejected_key_types": ["ssh-rsa", "ssh-dss", "ecdsa-sha2-nistp256"]
+}

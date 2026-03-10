@@ -1,0 +1,23 @@
+services:
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./dashboards/grafana/provisioning:/etc/grafana/provisioning
+      - ./dashboards/grafana:/var/lib/grafana/dashboards
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GF_SECURITY_ADMIN_PASSWORD:-admin}
+    restart: unless-stopped
+
+  webhook-handler:
+    build:
+      context: ./scim/webhook-handler
+    ports:
+      - "5000:5000"
+    environment:
+      AUTHS_SIGNERS_PATH: /data/allowed_signers
+      SCIM_BEARER_TOKEN: ${SCIM_BEARER_TOKEN:-}
+    volumes:
+      - ./.auths:/data
+    restart: unless-stopped

@@ -1,0 +1,6 @@
+# Auths allowed signers file — managed by fleet scripts
+# Format: <email> ssh-ed25519 <public-key>
+
+alice@example.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIExampleKeyAliceReplaceMeWithRealKey000000000
+bob@example.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIExampleKeyBobReplaceMeWithARealKey00000000000
+charlie@example.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIExampleKeyCharlieReplaceMeWithRealKey0000

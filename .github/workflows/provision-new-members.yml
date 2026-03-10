@@ -1,0 +1,45 @@
+name: Provision New Members
+on:
+  # Trigger manually or via webhook when org membership changes
+  workflow_dispatch:
+    inputs:
+      org:
+        description: 'GitHub organization name'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  provision:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Install auths
+        run: |
+          curl -sSL https://github.com/auths-dev/auths/releases/latest/download/auths-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          sudo mv auths /usr/local/bin/
+
+      - name: Sync signers from org
+        env:
+          GITHUB_TOKEN: ${{ secrets.FLEET_GITHUB_TOKEN }}
+        run: python fleet/sync_from_github_org.py --org ${{ inputs.org }} --output .auths/allowed_signers
+
+      - name: Commit if changed
+        run: |
+          git diff --quiet .auths/allowed_signers || {
+            git config user.name "auths-bot"
+            git config user.email "bot@auths.dev"
+            git add .auths/allowed_signers
+            git commit -m "chore: provision signers from ${{ inputs.org }}"
+            git push
+          }

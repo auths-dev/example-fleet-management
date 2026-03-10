@@ -1,0 +1,43 @@
+{
+  "id": null,
+  "uid": "auths-signing-compliance",
+  "title": "Signing Compliance",
+  "tags": ["auths", "compliance"],
+  "timezone": "browser",
+  "editable": true,
+  "time": {
+    "from": "now-90d",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Signing Rate Over Time",
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 },
+      "id": 1,
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0,
+          "max": 100
+        }
+      },
+      "targets": []
+    },
+    {
+      "type": "piechart",
+      "title": "Commit Signature Status",
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 },
+      "id": 2,
+      "targets": []
+    },
+    {
+      "type": "table",
+      "title": "Key Rotation Status by Team",
+      "gridPos": { "x": 0, "y": 8, "w": 24, "h": 8 },
+      "id": 3,
+      "targets": []
+    }
+  ],
+  "schemaVersion": 39
+}

@@ -1,0 +1,41 @@
+name: Compliance Report
+on:
+  schedule:
+    - cron: '0 6 1 * *' # First day of each month at 6am UTC
+  workflow_dispatch:
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate compliance report
+        run: |
+          python fleet/compliance_check.py \
+            --repo . \
+            --signers .auths/allowed_signers \
+            --days 30 \
+            --output compliance-report.json
+
+      - name: Generate audit export
+        run: |
+          python fleet/audit_export.py \
+            --repo . \
+            --count 500 \
+            --format json \
+            --output audit-trail.json
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: compliance-reports
+          path: |
+            compliance-report.json
+            audit-trail.json

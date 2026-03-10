@@ -1,0 +1,11 @@
+{
+  "name": "rotation_90d",
+  "description": "Signing keys must be rotated every 90 days",
+  "enforcement": "warn",
+  "max_key_age_days": 90,
+  "action": "notify_overdue",
+  "notification": {
+    "channel": "email",
+    "escalation_after_days": 7
+  }
+}

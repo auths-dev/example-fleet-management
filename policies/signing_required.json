@@ -1,0 +1,9 @@
+{
+  "name": "signing_required",
+  "description": "All commits to protected branches must be signed",
+  "enforcement": "enforce",
+  "scope": {
+    "branches": ["main", "release/*"]
+  },
+  "action": "reject_unsigned"
+}

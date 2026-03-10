@@ -1,0 +1,95 @@
+{
+  "id": null,
+  "uid": "auths-fleet-overview",
+  "title": "Auths Fleet Overview",
+  "tags": ["auths", "fleet"],
+  "timezone": "browser",
+  "editable": true,
+  "time": {
+    "from": "now-30d",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Total Signing Keys",
+      "gridPos": { "x": 0, "y": 0, "w": 6, "h": 4 },
+      "id": 1,
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "steps": [
+              { "color": "red", "value": 0 },
+              { "color": "green", "value": 1 }
+            ]
+          }
+        }
+      },
+      "targets": []
+    },
+    {
+      "type": "gauge",
+      "title": "Signing Compliance Rate",
+      "gridPos": { "x": 6, "y": 0, "w": 6, "h": 4 },
+      "id": 2,
+      "fieldConfig": {
+        "defaults": {
+          "min": 0,
+          "max": 100,
+          "unit": "percent",
+          "thresholds": {
+            "steps": [
+              { "color": "red", "value": 0 },
+              { "color": "yellow", "value": 50 },
+              { "color": "green", "value": 90 }
+            ]
+          }
+        }
+      },
+      "targets": []
+    },
+    {
+      "type": "stat",
+      "title": "Keys Needing Rotation",
+      "gridPos": { "x": 12, "y": 0, "w": 6, "h": 4 },
+      "id": 3,
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "steps": [
+              { "color": "green", "value": 0 },
+              { "color": "yellow", "value": 1 },
+              { "color": "red", "value": 5 }
+            ]
+          }
+        }
+      },
+      "targets": []
+    },
+    {
+      "type": "stat",
+      "title": "Policy Violations",
+      "gridPos": { "x": 18, "y": 0, "w": 6, "h": 4 },
+      "id": 4,
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "steps": [
+              { "color": "green", "value": 0 },
+              { "color": "red", "value": 1 }
+            ]
+          }
+        }
+      },
+      "targets": []
+    },
+    {
+      "type": "table",
+      "title": "Developer Signing Status",
+      "gridPos": { "x": 0, "y": 4, "w": 24, "h": 8 },
+      "id": 5,
+      "targets": []
+    }
+  ],
+  "schemaVersion": 39
+}
